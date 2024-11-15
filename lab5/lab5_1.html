@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модальне вікно</title>
+    <style>
+        /* Стиль для модального вікна */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="textField" placeholder="Наведись на це поле">
+    
+    <div id="modal"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // наведення миші на текстове поле
+            $('#textField').hover(function() {
+                // отримане значення текстового поля
+                var value = $(this).val();
+                
+                // вивожу значення в модальне вікно
+                $('#modal').text(value).fadeIn();
+            }, function() {
+                // сховаю модальне вікно, коли курсор залишає поле
+                $('#modal').fadeOut();
+            });
+        });
+    </script>
+</body>
+</html>
