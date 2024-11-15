@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Task</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #phrase {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px;
+            border: 2px solid green; /* Початкова зелена рамка */
+            background-color: #f9f9f9;
+            font-size: 16px;
+            display: none;
+            width: max-content;
+        }
+    </style>
+</head>
+<body>
+    <button id="start-animation">Start Animation</button>
+    <div id="phrase">Від топота копит пил по полю летить</div>
+
+    <script>
+        $(document).ready(function () {
+            $('#start-animation').click(function () {
+                const $phrase = $('#phrase');
+
+                // 1. З'являється в нижньому лівому куті вікна
+                $phrase.css({
+                    bottom: '10px',
+                    left: '10px',
+                    borderColor: 'green'
+                }).fadeIn(500, function () {
+
+                    // 2. Змінюється колір рамки на червоний
+                    $phrase.css('border-color', 'red');
+
+                    // 3. Рухається у протилежний кут вікна браузера
+                    $phrase.animate({
+                        bottom: ($(window).height() - $phrase.outerHeight() - 10) + 'px',
+                        left: ($(window).width() - $phrase.outerWidth() - 10) + 'px'
+                    }, 1000, function () {
+
+                        // 4. Зникає фраза (рамка залишається)
+                        $phrase.html('').delay(500).fadeOut(500, function () {
+
+                            // 5. Рухається до нижньої межі вікна браузера
+                            $phrase.show().animate({
+                                bottom: '10px'
+                            }, 1000, function () {
+
+                                // 6. З'являється фраза
+                                $phrase.html('Від топота копит пил по полю летить');
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

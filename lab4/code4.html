@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Показ коду</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .code-container {
+            background-color: #282c34;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #ff0f0f;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Код:</h1>
+        <div class="code-container">
+            <pre>
+                &lt;body&gt;
+
+    &lt;!-- 1 завдання --&gt;
+    &lt;h2&gt;Перевірка значень форми реєстрації&lt;/h2&gt;
+    &lt;div class=&quot;form-container&quot;&gt;
+        &lt;form id=&quot;registrationForm&quot;&gt;
+            &lt;label for=&quot;firstName&quot;&gt;Ім&#39;я:&lt;/label&gt;
+            &lt;input type=&quot;text&quot; id=&quot;firstName&quot; name=&quot;firstName&quot; required&gt;
+            &lt;div class=&quot;error&quot; id=&quot;firstNameError&quot;&gt;&lt;/div&gt;
+
+            &lt;label for=&quot;lastName&quot;&gt;Прізвище:&lt;/label&gt;
+            &lt;input type=&quot;text&quot; id=&quot;lastName&quot; name=&quot;lastName&quot; required&gt;
+            &lt;div class=&quot;error&quot; id=&quot;lastNameError&quot;&gt;&lt;/div&gt;
+
+            &lt;label for=&quot;organization&quot;&gt;Найменування організації:&lt;/label&gt;
+            &lt;input type=&quot;text&quot; id=&quot;organization&quot; name=&quot;organization&quot; required&gt;
+            &lt;div class=&quot;error&quot; id=&quot;organizationError&quot;&gt;&lt;/div&gt;
+
+            &lt;label for=&quot;creditCard&quot;&gt;Номер кредитної картки:&lt;/label&gt;
+            &lt;input type=&quot;text&quot; id=&quot;creditCard&quot; name=&quot;creditCard&quot; required&gt;
+            &lt;div class=&quot;error&quot; id=&quot;creditCardError&quot;&gt;&lt;/div&gt;
+
+            &lt;label for=&quot;phoneNumber&quot;&gt;Номер телефону:&lt;/label&gt;
+            &lt;input type=&quot;text&quot; id=&quot;phoneNumber&quot; name=&quot;phoneNumber&quot; required&gt;
+            &lt;div class=&quot;error&quot; id=&quot;phoneNumberError&quot;&gt;&lt;/div&gt;
+
+            &lt;label for=&quot;email&quot;&gt;Адреса електронної пошти:&lt;/label&gt;
+            &lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; required&gt;
+            &lt;div class=&quot;error&quot; id=&quot;emailError&quot;&gt;&lt;/div&gt;
+
+            &lt;button type=&quot;button&quot; onclick=&quot;submitForm()&quot;&gt;Надіслати&lt;/button&gt;
+            &lt;button type=&quot;button&quot; onclick=&quot;clearForm()&quot;&gt;Очистити&lt;/button&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+
+    &lt;br&gt;
+
+    &lt;!-- 2 завдання --&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;h2&gt;Перевірка рядка за допомогою регулярного виразу&lt;/h2&gt;
+
+        &lt;label for=&quot;inputString&quot;&gt;Введіть рядок для перевірки:&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;inputString&quot; placeholder=&quot;Введіть рядок&quot; value=&quot;aba aea aca aza axa aa a+aa*a&quot;&gt;
+
+        &lt;button onclick=&quot;findMatches()&quot;&gt;Перевірити&lt;/button&gt;
+
+        &lt;h3&gt;Результати пошуку:&lt;/h3&gt;
+        &lt;p&gt;Знайдені співпадіння: &lt;span id=&quot;regexResult&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        //  1: Перевірка введених у формі
+        let attemptCount = 0;
+
+        // вирази для перевірки
+        const nameRegex = /^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ]+$/; // для імені та прізвища
+        const phoneRegex = /^\+?\d{10,12}$/; // для номеру телефону
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; // для електронної пошти
+        const creditCardRegex = /^[0-9]{16}$/; // для кредитної картки
+
+        // перевірки полів
+        function submitForm() {
+            let valid = true;
+            // Ім&#39;я
+            const firstName = document.getElementById(&#39;firstName&#39;).value;
+            if (!firstName || !nameRegex.test(firstName)) {
+                document.getElementById(&#39;firstNameError&#39;).innerText = &#39;Ім&#39;я повинно бути заповнене та містити тільки літери&#39;;
+                valid = false;
+            } else {
+                document.getElementById(&#39;firstNameError&#39;).innerText = &#39;&#39;;
+            }
+            // Прізвище
+            const lastName = document.getElementById(&#39;lastName&#39;).value;
+            if (!lastName || !nameRegex.test(lastName)) {
+                document.getElementById(&#39;lastNameError&#39;).innerText = &#39;Прізвище повинно бути заповнене та містити тільки літери&#39;;
+                valid = false;
+            } else {
+                document.getElementById(&#39;lastNameError&#39;).innerText = &#39;&#39;;
+            }
+            // організації
+            const organization = document.getElementById(&#39;organization&#39;).value;
+            if (!organization) {
+                document.getElementById(&#39;organizationError&#39;).innerText = &#39;Це поле не може бути порожнім&#39;;
+                valid = false;
+            } else {
+                document.getElementById(&#39;organizationError&#39;).innerText = &#39;&#39;;
+            }
+            // кредитна картка
+            const creditCard = document.getElementById(&#39;creditCard&#39;).value;
+            if (!creditCard || !creditCardRegex.test(creditCard)) {
+                attemptCount++;
+                if (attemptCount &gt;= 3) {
+                    alert(&#39;Невірний номер кредитної картки. Більше спроб не буде дозволено.&#39;);
+                    return;
+                }
+                document.getElementById(&#39;creditCardError&#39;).innerText = &#39;Невірний формат номеру картки. Спробуйте ще раз&#39;;
+                valid = false;
+            } else {
+                document.getElementById(&#39;creditCardError&#39;).innerText = &#39;&#39;;
+            }
+            // Номер 
+            const phoneNumber = document.getElementById(&#39;phoneNumber&#39;).value;
+            if (!phoneNumber || !phoneRegex.test(phoneNumber)) {
+                document.getElementById(&#39;phoneNumberError&#39;).innerText = &#39;Невірний номер телефону&#39;;
+                valid = false;
+            } else {
+                document.getElementById(&#39;phoneNumberError&#39;).innerText = &#39;&#39;;
+            }
+            // Адреса
+            const email = document.getElementById(&#39;email&#39;).value;
+            if (!email || !emailRegex.test(email)) {
+                document.getElementById(&#39;emailError&#39;).innerText = &#39;Невірна адреса електронної пошти&#39;;
+                valid = false;
+            } else {
+                document.getElementById(&#39;emailError&#39;).innerText = &#39;&#39;;
+            }
+
+            if (valid) {
+                alert(&#39;Форма надіслана успішно!&#39;);
+            }
+        }
+        //  очищення форми
+        function clearForm() {
+            document.getElementById(&#39;registrationForm&#39;).reset();
+            document.getElementById(&#39;firstNameError&#39;).innerText = &#39;&#39;;
+            document.getElementById(&#39;lastNameError&#39;).innerText = &#39;&#39;;
+            document.getElementById(&#39;organizationError&#39;).innerText = &#39;&#39;;
+            document.getElementById(&#39;creditCardError&#39;).innerText = &#39;&#39;;
+            document.getElementById(&#39;phoneNumberError&#39;).innerText = &#39;&#39;;
+            document.getElementById(&#39;emailError&#39;).innerText = &#39;&#39;;
+        }
+
+        //  2: Регулярний вираз для пошуку символів 'a' поруч
+        function findMatches() {
+            const inputString = document.getElementById(&#39;inputString&#39;).value;
+            const regex = /a{2,}/g;
+            const matches = inputString.match(regex);
+            document.getElementById(&#39;regexResult&#39;).innerText = matches ? matches.join(&#39;, &#39;) : &#39;Немає співпадінь&#39;;
+        }
+    &lt;/script&gt;
+
+&lt;/body&gt;
+
+            
+            </pre>
+        </div>
+        <div class="back-link">
+            <a href="/index.html">Повернутись на головну</a>
+        </div>
+    </div>
+
+</body>
+</html>

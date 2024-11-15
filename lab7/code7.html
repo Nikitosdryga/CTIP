@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Показ коду </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .code-container {
+            background-color: #282c34;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #ff0f0f;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Код:</h1>
+        <div class="code-container">
+            <pre>
+
+                &lt;body&gt;
+                &lt;h1&gt;Тур&lt;/h1&gt;
+                &lt;img src=&quot;/7.png&quot; alt=&quot;Статична модель&quot;&gt;
+                &lt;div id=&quot;xmlContent&quot;&gt;&lt;/div&gt;
+                
+                &lt;script&gt;
+                    fetch(&#39;index.xml&#39;)
+                        .then(response =&gt; response.text())
+                        .then(str =&gt; {
+                            //  DOM-об&#39;єкт з XML
+                            const parser = new DOMParser();
+                            const xmlDoc = parser.parseFromString(str, &quot;application/xml&quot;);
+                
+                            // отримую всі елементи tour з XML
+                            const tours = xmlDoc.getElementsByTagName(&#39;tour&#39;);
+                            let content = &quot;&lt;ul&gt;&quot;; // Створюємо список
+                
+                            // кожного туру формую елемент списку
+                            for (let i = 0; i &lt; tours.length; i++) {
+                                const tour = tours[i];
+                                const country = tour.getElementsByTagName(&#39;country&#39;)[0].textContent;
+                                const type = tour.getElementsByTagName(&#39;type&#39;)[0].textContent;
+                                const description = tour.getElementsByTagName(&#39;description&#39;)[0].textContent;
+                                const price = tour.getElementsByTagName(&#39;price&#39;)[0].textContent;
+                                const quantity = tour.getElementsByTagName(&#39;quantity&#39;)[0].textContent;
+                
+                                // додаю інформацію про тур у вигляді елементів списку
+                                content += `
+                                    &lt;li&gt;
+                                        &lt;strong&gt;Country:&lt;/strong&gt; ${country}&lt;br&gt;
+                                        &lt;strong&gt;Type:&lt;/strong&gt; ${type}&lt;br&gt;
+                                        &lt;strong&gt;Description:&lt;/strong&gt; ${description}&lt;br&gt;
+                                        &lt;strong&gt;Price:&lt;/strong&gt; $${price}&lt;br&gt;
+                                        &lt;strong&gt;Quantity:&lt;/strong&gt; ${quantity} places&lt;br&gt;&lt;br&gt;
+                                    &lt;/li&gt;
+                                `;
+                            }
+                            content += "&lt;/ul&gt;"; // закриваю &lt;/ul&gt;
+                            document.getElementById(&#39;xmlContent&#39;).innerHTML = content;
+                        })
+                        .catch(error =&gt; console.error(&#39;Error loading XML:&#39;, error));
+                &lt;/script&gt;
+                
+                &lt;/body&gt;
+            </pre>
+        </div>
+        <div class="code-container">
+            <pre>
+                &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+                &lt;tours&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;Italy&lt;/country&gt;
+                        &lt;type&gt;excursion&lt;/type&gt;
+                        &lt;description&gt;Visit the Colosseum, Vatican, and other historic sites in Rome.&lt;/description&gt;
+                        &lt;hotTour&gt;false&lt;/hotTour&gt;
+                        &lt;price&gt;1200&lt;/price&gt;
+                        &lt;quantity&gt;20&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;France&lt;/country&gt;
+                        &lt;type&gt;individual&lt;/type&gt;
+                        &lt;description&gt;Explore the beauty of Provence with a private guide.&lt;/description&gt;
+                        &lt;hotTour&gt;true&lt;/hotTour&gt;
+                        &lt;price&gt;1500&lt;/price&gt;
+                        &lt;quantity&gt;10&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;Spain&lt;/country&gt;
+                        &lt;type&gt;weekend&lt;/type&gt;
+                        &lt;description&gt;Weekend getaway to Barcelona for sightseeing and relaxation.&lt;/description&gt;
+                        &lt;hotTour&gt;false&lt;/hotTour&gt;
+                        &lt;price&gt;800&lt;/price&gt;
+                        &lt;quantity&gt;15&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;Japan&lt;/country&gt;
+                        &lt;type&gt;excursion&lt;/type&gt;
+                        &lt;description&gt;Tour Tokyo, Kyoto, and Mount Fuji in one trip.&lt;/description&gt;
+                        &lt;hotTour&gt;true&lt;/hotTour&gt;
+                        &lt;price&gt;2200&lt;/price&gt;
+                        &lt;quantity&gt;5&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;Egypt&lt;/country&gt;
+                        &lt;type&gt;individual&lt;/type&gt;
+                        &lt;description&gt;Private tour to the pyramids and ancient temples.&lt;/description&gt;
+                        &lt;hotTour&gt;false&lt;/hotTour&gt;
+                        &lt;price&gt;1000&lt;/price&gt;
+                        &lt;quantity&gt;12&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;USA&lt;/country&gt;
+                        &lt;type&gt;weekend&lt;/type&gt;
+                        &lt;description&gt;Weekend trip to New York City for sightseeing and shopping.&lt;/description&gt;
+                        &lt;hotTour&gt;false&lt;/hotTour&gt;
+                        &lt;price&gt;950&lt;/price&gt;
+                        &lt;quantity&gt;25&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;Germany&lt;/country&gt;
+                        &lt;type&gt;excursion&lt;/type&gt;
+                        &lt;description&gt;Guided tour of Berlin&#39;s landmarks and museums.&lt;/description&gt;
+                        &lt;hotTour&gt;true&lt;/hotTour&gt;
+                        &lt;price&gt;1300&lt;/price&gt;
+                        &lt;quantity&gt;18&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;Australia&lt;/country&gt;
+                        &lt;type&gt;individual&lt;/type&gt;
+                        &lt;description&gt;Private tour of the Great Barrier Reef and Sydney.&lt;/description&gt;
+                        &lt;hotTour&gt;false&lt;/hotTour&gt;
+                        &lt;price&gt;2500&lt;/price&gt;
+                        &lt;quantity&gt;8&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;Brazil&lt;/country&gt;
+                        &lt;type&gt;weekend&lt;/type&gt;
+                        &lt;description&gt;Weekend trip to Rio de Janeiro for sightseeing and beach time.&lt;/description&gt;
+                        &lt;hotTour&gt;true&lt;/hotTour&gt;
+                        &lt;price&gt;1100&lt;/price&gt;
+                        &lt;quantity&gt;30&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                    &lt;tour&gt;
+                        &lt;country&gt;Switzerland&lt;/country&gt;
+                        &lt;type&gt;excursion&lt;/type&gt;
+                        &lt;description&gt;Visit the Swiss Alps, Zurich, and Lucerne.&lt;/description&gt;
+                        &lt;hotTour&gt;false&lt;/hotTour&gt;
+                        &lt;price&gt;1800&lt;/price&gt;
+                        &lt;quantity&gt;10&lt;/quantity&gt;
+                    &lt;/tour&gt;
+                &lt;/tours&gt;
+                
+            </pre>
+        </div>
+        <div class="back-link">
+            <a href="/index.html">Повернутись на головну</a>
+        </div>
+    </div>
+
+</body>
+</html>
+    

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Показ коду </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .code-container {
+            background-color: #282c34;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #ff0f0f;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Код:</h1>
+        <div class="code-container">
+            <pre>
+&lt;body&gt;
+    &lt;div class="images-container"&gt;
+        &lt;img src="/1.jpg" id="image1" alt="Зображення 1"&gt;
+        &lt;img src="/2.jpeg" id="image2" alt="Зображення 2"&gt;
+        &lt;img src="/3.webp" id="image3" alt="Зображення 3"&gt;
+        &lt;img src="/4.jpg" id="image4" alt="Зображення 4"&gt;
+    &lt;/div&gt;
+
+    &lt;div class="controls"&gt;
+        &lt;input type="number" id="input1" placeholder="Номер 1" min="1" max="4"&gt;
+        &lt;input type="number" id="input2" placeholder="Номер 2" min="1" max="4"&gt;
+        &lt;button onclick="swapImages()"&gt;Переставити&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        function swapImages() {
+            // значення введених номерів
+            const num1 = document.getElementById('input1').value - 1;
+            const num2 = document.getElementById('input2').value - 1;
+
+            // отримую зображення
+            const images = document.querySelectorAll('.images-container img');
+
+            // чи введені номери коректні
+            if (num1 >= 0 && num1 &lt; images.length && num2 >= 0 && num2 &lt; images.length) {
+                // міняю місцями
+                const tempSrc = images[num1].src;
+                images[num1].src = images[num2].src;
+                images[num2].src = tempSrc;
+            } else {
+                alert("Невірно введені номери зображень.");
+            }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+            </pre>
+        </div>
+
+        <!-- Кнопка для повернення -->
+        <div class="back-link">
+            <a href="/index.html">Повернутись на головну</a>
+        </div>
+    </div>
+
+</body>
+</html>

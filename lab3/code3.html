@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Показ коду</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .code-container {
+            background-color: #282c34;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #ff0f0f;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Код:</h1>
+        <div class="code-container">
+            <pre>
+                &lt;body&gt;
+
+                &lt;div id="gameField"&gt;
+                    &lt;div id="basket"&gt;&lt;/div&gt;
+                &lt;/div&gt;
+            
+                &lt;button id="startBtn"&gt;Почати гру&lt;/button&gt;
+            
+                &lt;script src="https://code.jquery.com/jquery-3.6.0.min.js"&gt;&lt;/script&gt;
+                &lt;script&gt;
+                    const gameField = $('#gameField');
+                    const basket = $('#basket');
+                    const startBtn = $('#startBtn');
+                    let gameInterval;
+                    let fallingBalls = [];
+                    let isPlaying = false;
+            
+                    // створюю м'яч
+                    function createBall() {
+                        const ball = $('<div class="ball"&gt;&lt;/div&gt;');
+                        const ballSize = Math.random() * 30 + 20; // розмір м'яча від 20 до 50px
+                        ball.css({
+                            left: Math.random() * (gameField.width() - ballSize), // випадкова позиція по осі X
+                            top: -ballSize, // м'яч починає падати з верхньої частини
+                            width: ballSize,
+                            height: ballSize
+                        });
+                        gameField.append(ball);
+                        fallingBalls.push(ball);
+                    }
+            
+                    // Почати гру
+                    function startGame() {
+                        if (isPlaying) return;
+            
+                        isPlaying = true;
+                        startBtn.text('Зупинити гру');
+            
+                        gameInterval = setInterval(function() {
+                            createBall(); // створюю м'яч кожні 2 секунди
+                            moveBalls();   // переміщую м'ячі вниз
+                        }, 2000);
+                    }
+            
+                    // зупинити гру
+                    function stopGame() {
+                        isPlaying = false;
+                        clearInterval(gameInterval);
+                        fallingBalls.forEach(ball => ball.remove());
+                        fallingBalls = [];
+                        startBtn.text('Почати гру');
+                    }
+            
+                    // переміщуємо м'ячі вниз
+                    function moveBalls() {
+                        fallingBalls.forEach(ball => {
+                            let ballTop = parseFloat(ball.css('top'));
+                            ballTop += 5; // м'яч рухається вниз на 5px за кожен крок
+                            ball.css('top', ballTop + 'px');
+            
+                            // перевірка на зіткнення з кошиком
+                            if (ballTop + ball.height() >= gameField.height() - basket.height() &&
+                                ball.position().left + ball.width() >= basket.position().left &&
+                                ball.position().left <= basket.position().left + basket.width()) {
+                                ball.remove(); // м'яч зловлений, видаляємо
+                                fallingBalls = fallingBalls.filter(b => b !== ball);
+                            }
+            
+                            // якщо м'яч досягнув дна і не зловлений, видаляємо його
+                            if (ballTop >= gameField.height()) {
+                                ball.remove();
+                                fallingBalls = fallingBalls.filter(b => b !== ball);
+                            }
+                        });
+                    }
+            
+                    // переміщення кошика
+                    let basketSpeed = 20; // швидкість руху
+                    $(document).keydown(function(e) {
+                        const basketLeft = basket.position().left;
+                        if (e.key === "ArrowLeft" && basketLeft > 0) {
+                            basket.css('left', basketLeft - basketSpeed); // вліво
+                        } else if (e.key === "ArrowRight" && basketLeft < gameField.width() - basket.width()) {
+                            basket.css('left', basketLeft + basketSpeed); // вправо
+                        }
+                    });
+            
+                    // обробка кліку на кнопку для початку/зупинки гри
+                    startBtn.click(function() {
+                        if (isPlaying) {
+                            stopGame();
+                        } else {
+                            startGame();
+                        }
+                    });
+                &lt;/script&gt;
+            
+            &lt;/body&gt;
+            
+            </pre>
+        </div>
+        <div class="back-link">
+            <a href="/index.html">Повернутись на головну</a>
+        </div>
+    </div>
+
+</body>
+</html>
