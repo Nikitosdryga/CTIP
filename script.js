@@ -29,8 +29,8 @@ const labContent = {
         condition: `Умова лабораторної роботи 5: 
         5.1 9) За наведенням курсору на текстове поле виводити модальне вікно зі значенням цього поля
         5.2 9) Блок блакитного кольору рухається зверху вниз, збільшується, стає синім, переміщається у початкову точку, зменшується`,
-        resultLink1: "/lab5/Lab5_1.html",
-        resultLink2: "/lab5/Lab5_2.html",
+        resultLink1: "/lab5/lab5_1.html",
+        resultLink2: "/lab5/lab5_2.html",
         codeLink1: "/lab5/code5_1.html",
         codeLink2: "/lab5/code5_2.html"
     },
