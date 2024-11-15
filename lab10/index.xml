@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tours>
+    <tour>
+        <country>Італія</country>
+        <type>екскурсія</type>
+        <description>Відвідайте Колізей, Ватикан та інші історичні місця в Римі.</description>
+        <hotTour>false</hotTour>
+        <price>90</price>
+        <quantity>20</quantity>
+    </tour>
+    <tour>
+        <country>Франція</country>
+        <type>індивідуальний</type>
+        <description>Досліджуйте красоти Провансу з приватним гідом.</description>
+        <hotTour>true</hotTour>
+        <price>50</price>
+        <quantity>10</quantity>
+    </tour>
+    <tour>
+        <country>Іспанія</country>
+        <type>вихідні</type>
+        <description>Вихідні в Барселону для екскурсій та відпочинку.</description>
+        <hotTour>false</hotTour>
+        <price>70</price>
+        <quantity>15</quantity>
+    </tour>
+    <tour>
+        <country>Японія</country>
+        <type>екскурсія</type>
+        <description>Тур по Токіо, Кіото та горі Фуджі за один раз.</description>
+        <hotTour>true</hotTour>
+        <price>80</price>
+        <quantity>5</quantity>
+    </tour>
+    <tour>
+        <country>Єгипет</country>
+        <type>індивідуальний</type>
+        <description>Приватний тур до пірамід і стародавніх храмів.</description>
+        <hotTour>false</hotTour>
+        <price>100</price>
+        <quantity>12</quantity>
+    </tour>
+    <tour>
+        <country>США</country>
+        <type>вихідні</type>
+        <description>Вихідні до Нью-Йорка для екскурсій та шопінгу.</description>
+        <hotTour>false</hotTour>
+        <price>95</price>
+        <quantity>25</quantity>
+    </tour>
+    <tour>
+        <country>Німеччина</country>
+        <type>екскурсія</type>
+        <description>Екскурсія по визначних пам'ятках Берліна та музеях.</description>
+        <hotTour>true</hotTour>
+        <price>35</price>
+        <quantity>18</quantity>
+    </tour>
+    <tour>
+        <country>Австралія</country>
+        <type>індивідуальний</type>
+        <description>Приватний тур по Великому бар'єрному рифу та Сіднею.</description>
+        <hotTour>false</hotTour>
+        <price>78</price>
+        <quantity>8</quantity>
+    </tour>
+    <tour>
+        <country>Бразилія</country>
+        <type>вихідні</type>
+        <description>Вихідні до Ріо-де-Жанейро для екскурсій та відпочинку на пляжі.</description>
+        <hotTour>true</hotTour>
+        <price>80</price>
+        <quantity>30</quantity>
+    </tour>
+    <tour>
+        <country>Швейцарія</country>
+        <type>екскурсія</type>
+        <description>Відвідайте Швейцарські Альпи, Цюріх та Люцерн.</description>
+        <hotTour>false</hotTour>
+        <price>50</price>
+        <quantity>10</quantity>
+    </tour>
+</tours>

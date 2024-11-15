@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Туристичні пропозиції</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Варіант 9</h3>
+    <p>Інформація про пропозиції туристичної агенції:</p>
+    <p>- Країна;</p>
+    <p>- Тип туру (екскурсія, індивідуальний тур, тур вихідного дня);</p>
+    <p>- Опис туру;</p>
+    <p>- гарячий тур (непарний елемент);</p>
+    <p>- Вартість;</p>
+    <p>- Кількість.</p>
+
+    <h1>Завдання 1: Відображення XML документа</h1>
+    <pre id="xml-original"></pre>
+
+    <h1>Завдання 2: Таблиця з кількох стовпців</h1>
+    <div id="xml-table"></div>
+
+    <h1>Завдання 3: Таблиця зі словесними значеннями</h1>
+    <div id="xml-table-converted"></div>
+
+    <script>
+        // Завантаження XML-файлу
+        function loadXML() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'index.xml', true); 
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var xmlText = xhr.responseText;
+                    var xml = xhr.responseXML;
+
+                    document.getElementById('xml-original').textContent = xmlText;
+                    displayTours(xml, 'xml-table', false); // Звичайна таблиця
+                    displayTours(xml, 'xml-table-converted', true); // Таблиця з текстовими значеннями
+                }
+            };
+            xhr.send();
+        }
+
+        // Функція для відображення таблиці з тури
+        function displayTours(xml, elementId, convertValuesFlag) {
+            var output = document.getElementById(elementId);
+            var table = document.createElement('table');
+            table.border = '1';
+
+            var headers = ['Країна', 'Тип туру', 'Опис туру', 'Гарячий тур', 'Вартість', 'Кількість'];
+            var tr = document.createElement('tr');
+            headers.forEach(function (header) {
+                var th = document.createElement('th');
+                th.textContent = header;
+                tr.appendChild(th);
+            });
+            table.appendChild(tr);
+
+            // Дані з XML
+            var tours = xml.getElementsByTagName('tour');
+            for (var i = 0; i < tours.length; i++) {
+                var tour = tours[i];
+                var row = document.createElement('tr');
+
+                var country = tour.getElementsByTagName('country')[0].textContent;
+                row.appendChild(createCell(country));
+
+                var type = tour.getElementsByTagName('type')[0].textContent;
+                row.appendChild(createCell(type));
+
+                var description = tour.getElementsByTagName('description')[0].textContent;
+                row.appendChild(createCell(description));
+
+                var hotTour = tour.getElementsByTagName('hotTour')[0].textContent === 'true';
+                row.appendChild(createCell(hotTour));
+
+                var price = tour.getElementsByTagName('price')[0].textContent;
+                price = convertValuesFlag ? convertNumberToWords(price) : price;
+                row.appendChild(createCell(price));
+
+                var quantity = tour.getElementsByTagName('quantity')[0].textContent;
+                quantity = convertValuesFlag ? convertNumberToWords(quantity) : quantity;
+                row.appendChild(createCell(quantity));
+
+                table.appendChild(row);
+            }
+
+            output.appendChild(table);
+        }
+
+        // Функція для створення комірки таблиці
+        function createCell(content) {
+            var td = document.createElement('td');
+            td.textContent = content;
+            return td;
+        }
+
+        // Функція для перетворення числа в слова
+        function convertNumberToWords(number) {
+            const ones = ['','один','два','три','чотири','п\'ять','шість','сім','вісім','дев\'ять'];
+            const teens = ['десять','одинадцять','дванадцять','тринадцять','чотирнадцять','п\'ятнадцять','шістнадцять','сімнадцять','вісімнадцять','дев\'ятнадцять'];
+            const tens = ['','десять','двадцять','тридцять','сорок','п\'ятдесят','шістдесят','сімдесят','вісімдесят','дев\'яносто'];
+            const hundreds = ['','сто','двісті','триста','чотириста','п\'ятсот','шістсот','сімсот','вісімсот','дев\'ятсот'];
+
+            number = parseInt(number);
+            if (number === 0) return 'нуль';
+
+            var result = '';
+            if (number >= 100) {
+                result += hundreds[Math.floor(number / 100)] + ' ';
+                number %= 100;
+            }
+            if (number >= 20) {
+                result += tens[Math.floor(number / 10)] + ' ';
+                number %= 10;
+            }
+            if (number >= 10) {
+                result += teens[number - 10] + ' ';
+            } else if (number > 0) {
+                result += ones[number] + ' ';
+            }
+
+            return result.trim();
+        }
+
+        // Завантаження XML при завантаженні сторінки
+        window.onload = loadXML;
+    </script>
+</body>
+</html>
