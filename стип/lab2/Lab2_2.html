@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рух зображення</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #movingImage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            transition: transform 2s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <img id="movingImage" src="/1.jpg" alt="Зображення" />
+
+    <script>
+        // отримую елемент зображення
+        const img = document.getElementById('movingImage');
+
+        // анімації
+        function moveImage() {
+            // розміри вікна
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            // рухаю зображення до правого нижнього кута
+            img.style.transform = `translate(${windowWidth - 100}px, ${windowHeight - 100}px)`;
+        }
+
+        // запуск анімацію через 1 секунду після завантаження сторінки
+        window.onload = function() {
+            setTimeout(moveImage, 1000);  // затримка 1 секунда
+        };
+    </script>
+
+</body>
+</html>

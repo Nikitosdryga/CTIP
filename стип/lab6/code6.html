@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Показ коду </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .code-container {
+            background-color: #282c34;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #ff0f0f;
+            text-decoration: none;
+            font-size: 25px;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Код:</h1>
+        <div class="code-container">
+            <pre>
+                &lt;!DOCTYPE html&gt;
+                &lt;html lang="en"&gt;
+                &lt;head&gt;
+                    &lt;meta charset="UTF-8"&gt;
+                    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+                    &lt;title&gt;jQuery Animation Task&lt;/title&gt;
+                    &lt;script src="https://code.jquery.com/jquery-3.6.0.min.js"&gt;&lt;/script&gt;
+                    &lt;style&gt;
+                        #phrase {
+                            position: fixed;
+                            bottom: 10px;
+                            left: 10px;
+                            padding: 10px;
+                            border: 2px solid green;
+                            background-color: #f9f9f9;
+                            font-size: 16px;
+                            width: max-content;
+                            display: none;
+                        }
+                    &lt;/style&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                    &lt;button id="start-animation"&gt;Start Animation&lt;/button&gt;
+                    &lt;div id="phrase"&gt;Від топота копит пил по полю летить&lt;/div&gt;
+                
+                    &lt;script&gt;
+                        $(document).ready(function () {
+                            $('#start-animation').click(function () {
+                                const $phrase = $('#phrase');
+                                
+                                // 1. З'являється в нижньому лівому куті вікна
+                                $phrase.css({
+                                    bottom: '10px',
+                                    left: '10px',
+                                    borderColor: 'green',
+                                }).fadeIn(500, function () {
+                                    
+                                    // 2. Змінюється колір рамки на червоний
+                                    $phrase.css('border-color', 'red');
+                
+                                    // 3. Рухається у протилежний кут вікна браузера
+                                    $phrase.animate({
+                                        bottom: ($(window).height() - $phrase.outerHeight() - 10) + 'px',
+                                        left: ($(window).width() - $phrase.outerWidth() - 10) + 'px'
+                                    }, 1000, function () {
+                
+                                        // 4. Зникає фраза (рамка залишається)
+                                        $phrase.html('').delay(500).fadeOut(500, function () {
+                
+                                            // 5. Рухається до нижньої межі вікна браузера
+                                            $phrase.show().animate({
+                                                bottom: '10px'
+                                            }, 1000, function () {
+                
+                                                // 6. З'являється фраза
+                                                $phrase.html('Від топота копит пил по полю летить');
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    &lt;/script&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+            </pre>
+        </div>
+        <div class="back-link">
+            <a href="/index.html">Повернутись на головну</a>
+        </div>
+    </div>
+
+</body>
+</html>

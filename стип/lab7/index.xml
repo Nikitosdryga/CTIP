@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tours>
+    <tour>
+        <country>Italy</country>
+        <type>excursion</type>
+        <description>Visit the Colosseum, Vatican, and other historic sites in Rome.</description>
+        <hotTour>false</hotTour>
+        <price>1200</price>
+        <quantity>20</quantity>
+    </tour>
+    <tour>
+        <country>France</country>
+        <type>individual</type>
+        <description>Explore the beauty of Provence with a private guide.</description>
+        <hotTour>true</hotTour>
+        <price>1500</price>
+        <quantity>10</quantity>
+    </tour>
+    <tour>
+        <country>Spain</country>
+        <type>weekend</type>
+        <description>Weekend getaway to Barcelona for sightseeing and relaxation.</description>
+        <hotTour>false</hotTour>
+        <price>800</price>
+        <quantity>15</quantity>
+    </tour>
+    <tour>
+        <country>Japan</country>
+        <type>excursion</type>
+        <description>Tour Tokyo, Kyoto, and Mount Fuji in one trip.</description>
+        <hotTour>true</hotTour>
+        <price>2200</price>
+        <quantity>5</quantity>
+    </tour>
+    <tour>
+        <country>Egypt</country>
+        <type>individual</type>
+        <description>Private tour to the pyramids and ancient temples.</description>
+        <hotTour>false</hotTour>
+        <price>1000</price>
+        <quantity>12</quantity>
+    </tour>
+    <tour>
+        <country>USA</country>
+        <type>weekend</type>
+        <description>Weekend trip to New York City for sightseeing and shopping.</description>
+        <hotTour>false</hotTour>
+        <price>950</price>
+        <quantity>25</quantity>
+    </tour>
+    <tour>
+        <country>Germany</country>
+        <type>excursion</type>
+        <description>Guided tour of Berlin's landmarks and museums.</description>
+        <hotTour>true</hotTour>
+        <price>1300</price>
+        <quantity>18</quantity>
+    </tour>
+    <tour>
+        <country>Australia</country>
+        <type>individual</type>
+        <description>Private tour of the Great Barrier Reef and Sydney.</description>
+        <hotTour>false</hotTour>
+        <price>2500</price>
+        <quantity>8</quantity>
+    </tour>
+    <tour>
+        <country>Brazil</country>
+        <type>weekend</type>
+        <description>Weekend trip to Rio de Janeiro for sightseeing and beach time.</description>
+        <hotTour>true</hotTour>
+        <price>1100</price>
+        <quantity>30</quantity>
+    </tour>
+    <tour>
+        <country>Switzerland</country>
+        <type>excursion</type>
+        <description>Visit the Swiss Alps, Zurich, and Lucerne.</description>
+        <hotTour>false</hotTour>
+        <price>1800</price>
+        <quantity>10</quantity>
+    </tour>
+</tours>
